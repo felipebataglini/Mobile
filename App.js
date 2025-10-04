@@ -15,7 +15,7 @@ const Stack = createStackNavigator()
 const App = () => {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Login">
+            <Stack.Navigator initialRouteName="Login" screenOptions={{headerTintColor: '#573FBA', headerStyle: { backgroundColor: '#2B1D62' }, headerTitleStyle: { fontFamily: 'AveriaLibre-Regular', color: '#FFFFFF'}}}>
                 <Stack.Screen name="Login" component={Login} options={{headerShown: false}} />
                 <Stack.Screen name="Drawer" component={Drawer} options={{headerShown: false}}/>
                 <Stack.Screen name="Cadastro" component={Cadastro} options={{ headerTitle: 'Nova Conta'}} />
