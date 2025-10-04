@@ -14,7 +14,6 @@ const Home = (props) => {
     return (
 
         <View>
-            <Text>Tela Home</Text>
             <Botao texto="BOTÃO TEMPORÁRIO (simula ícones pesquisa)" funcao={opcoesPesquisa} />
             <Botao texto='NOVA PESQUISA' funcao={cadastrarPesquisa}></Botao>
         </View>
