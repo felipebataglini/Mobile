@@ -41,12 +41,6 @@ const Cadastro = (props) => {
 }
 
 const estilos = StyleSheet.create({
-    titulo: {
-        fontSize: 24,
-        color: '#FFFFFF',
-        fontFamily: 'AveriaLibre-Regular',
-        marginRight: 15
-    },
     container: {
         backgroundColor: '#372775',
         alignItems: 'center',
