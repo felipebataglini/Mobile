@@ -39,7 +39,7 @@ const Login = (props) => {
                 <View style={{height: '45%', width: '70%', justifyContent: 'space-between'}}>
                     <CampoTexto texto="E-mail" value={email} onChangeText={setEmail} tipoTeclado="email-address" secure={false} />
                     <CampoTexto texto="Senha" value={senha} onChangeText={setSenha} secure={true} />
-                    <Botao texto='Entrar' funcao={logar} cor='#37bd6d' />
+                    <Botao texto='Entrar' funcao={logar} cor='#37BD6D' />
                 </View>
                 <View style={{height: '25%', width: '70%', marginTop: 5, justifyContent: 'flex-end'}}>
                     <Botao texto='Criar minha conta' funcao={cadastrar} cor='#419ED7' />
