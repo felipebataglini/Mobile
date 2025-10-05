@@ -17,12 +17,12 @@ const Coleta = (props) => {
 
     // Navega para a tela de Agradecimento ao selecionar um sentimento
     const handleSelectOption = () => {
-        props.navigation.replace('Agradecimento'); 
+        props.navigation.navigate('Agradecimento'); 
     };
 
     // NOVA FUNÇÃO: Navega para Ações Pesquisa ao clicar no canto superior direito
     const navigateToAcoesPesquisa = () => {
-        props.navigation.replace('AcaoPesquisa');
+        props.navigation.navigate('Drawer');
     };
 
     return (
