@@ -17,10 +17,6 @@ const Home = (props) => {
         props.navigation.navigate('AcaoPesquisa')
     }
 
-    const agradecimento = () => {
-        props.navigation.navigate('Agradecimento')
-    }
-
     return (
         <View style={estilos.container}>
             <View style={{ height: '20%', width: '90%', justifyContent: 'center' }}>

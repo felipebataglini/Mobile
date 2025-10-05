@@ -19,7 +19,7 @@ const Agradecimento = (props) => {
         // Inicia um timer de 3000 milissegundos (3 segundos)
         const timer = setTimeout(() => {
             // Após 3 segundos, navega para a tela 'Coleta'
-            props.navigation.navigate('Coleta');
+            props.navigation.replace('Coleta');
         }, 3000);
 
         // Função de limpeza: cancela o timer se o componente for desmontado
