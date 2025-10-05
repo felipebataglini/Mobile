@@ -22,7 +22,7 @@ const Coleta = (props) => {
 
     // NOVA FUNÇÃO: Navega para Ações Pesquisa ao clicar no canto superior direito
     const navigateToAcoesPesquisa = () => {
-        props.navigation.navigate('AcoesPesquisa');
+        props.navigation.navigate('AcaoPesquisa');
     };
 
     return (
@@ -85,15 +85,16 @@ const styles = StyleSheet.create({
     // NOVO ESTILO: Para o botão invisível
     hiddenButton: {
         position: 'absolute',
-        top: 10,
-        right: 10,
-        width: 50,  // Dimensões baseadas na imagem
-        height: 50, // Dimensões baseadas na imagem
+        top: 0,
+        right: 0,
+        width: 100, 
+        height: 50,
+        zIndex: 1,
     },
     questionText: {
         color: '#FFFFFF',
         fontFamily: 'Averia Libre',
-        fontSize: 48,
+        fontSize: 24,
         fontWeight: '400',
         textAlign: 'center',
         marginBottom: 60,
@@ -109,7 +110,7 @@ const styles = StyleSheet.create({
     labelText: {
         color: '#FFFFFF',
         fontFamily: 'Averia Libre',
-        fontSize: 36,
+        fontSize: 18,
         fontWeight: '400',
         marginTop: 10,
     }
