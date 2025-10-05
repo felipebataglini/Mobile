@@ -9,6 +9,7 @@ import ModificarPesquisa from "./src/screens/ModificarPesquisa"
 import AcaoPesquisa from "./src/screens/AcaoPesquisa"
 import Coleta from "./src/screens/Coleta"
 import Relatorio from "./src/screens/Relatorio"
+import Agradecimento from "./src/screens/Agradecimento";
 
 const Stack = createStackNavigator()
 
@@ -25,6 +26,7 @@ const App = () => {
                 <Stack.Screen name="Coleta" component={Coleta} options={{ headerTitle: 'Coleta de dados'}} />
                 <Stack.Screen name="Relatorio" component={Relatorio} options={{ headerTitle: 'Relatório'}} />
                 <Stack.Screen name="AcaoPesquisa" component={AcaoPesquisa} options={{ headerShown: false }} />
+                <Stack.Screen name="Agradecimento" component={Agradecimento} options={{headerShown: false}} />
             </Stack.Navigator>
         </NavigationContainer>
     )
