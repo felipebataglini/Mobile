@@ -27,7 +27,7 @@ const Recuperacao = (props) => {
     return (
         <PaperProvider theme={theme}>
             <View style={estilos.container}>
-                <View style={{width: '70%', height: '60%', justifyContent: 'center', margin: 'auto'}}>
+                <View style={{width: '70%', height: '50%', justifyContent: 'space-between', marginTop: 170}}>
                     <CampoTexto texto="E-mail" value={email} onChangeText={setEmail} tipoTeclado="email-address" secure={false} />
                     <Botao texto="RECUPERAR" funcao={recuperar} cor='#37BD6D' />
                 </View>

@@ -6,7 +6,7 @@ const CampoTexto = (props) => {
     return (
             <View style={estilos.container}>
                 <Text style={estilos.tituloCampo}>{props.texto}</Text>
-                <TextInput value={props.valor} onChangeText={props.funcao} keyboardType={props.tipoTeclado} secureTextEntry={props.secure} style={{height: '30%'}}/>
+                <TextInput value={props.valor} onChangeText={props.funcao} keyboardType={props.tipoTeclado} secureTextEntry={props.secure} style={{height: 50}}/>
             </View>
     )
 }

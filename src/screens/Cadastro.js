@@ -29,7 +29,7 @@ const Cadastro = (props) => {
     return (
         <PaperProvider theme={theme}>
             <View style={estilos.container}>
-                <View style={{width: '70%', height: '60%', justifyContent: 'center', margin: 'auto'}}>
+                <View style={{width: '70%', height: '90%', justifyContent: 'space-between', marginVertical: 20}}>
                     <CampoTexto texto="E-mail" value={email} onChangeText={setEmail} tipoTeclado="email-address" secure={false} />
                     <CampoTexto texto="Senha" value={senha} onChangeText={setSenha} secure={true} />
                     <CampoTexto texto="Repetir Senha" value={verificaSenha} onChangeText={setVerificaSenha} secure={true} />
