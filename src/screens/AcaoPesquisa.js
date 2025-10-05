@@ -1,5 +1,6 @@
-import { View, Text } from 'react-native'
-import Botao from '../components/Botao'
+import { View, TouchableOpacity, StyleSheet } from 'react-native'
+import { Text } from 'react-native-gesture-handler'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 const AcaoPesquisa = (props) => {
 
@@ -16,13 +17,51 @@ const AcaoPesquisa = (props) => {
     }
 
     return (
-        <View>
-            <Text>Tela de Ações Pesquisa</Text>
-            <Botao texto="Modificar" funcao={modificar} />
-            <Botao texto="Coletar dados" funcao={coletar} />
-            <Botao texto="Relatório" funcao={gerarRelatorio} />
+        <View style={estilos.container}>
+            <View style={{ flexDirection: 'row', width: '90%', justifyContent: 'space-between' }}>
+                <TouchableOpacity style={estilos.card} onPress={modificar} activeOpacity={0.7}>
+                    <Icon name="edit-note" size={30} color='#FFFFFF' />
+                    <Text style={estilos.descricao}>Modificar</Text>  
+                </TouchableOpacity>
+
+                <TouchableOpacity style={estilos.card} onPress={coletar} activeOpacity={0.7}>
+                    <Icon name="library-add-check" size={30} color='#FFFFFF' />
+                    <Text style={estilos.descricao}>Coletar dados</Text>    
+                </TouchableOpacity> 
+
+                <TouchableOpacity style={estilos.card} onPress={gerarRelatorio} activeOpacity={0.7}>
+                    <Icon name="donut-large" size={30} color='#FFFFFF' />
+                    <Text style={estilos.descricao}>Relatório</Text>    
+                </TouchableOpacity> 
+
+            </View>
         </View>
     )
 }
+
+const estilos = StyleSheet.create({
+    container: {
+        backgroundColor: '#372775',
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    card: {
+        backgroundColor: '#312464',
+        width: 90,
+        height: 100,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 5,
+        padding: 5
+    },
+    descricao: {
+        fontFamily: 'AveriaLibre-Regular',
+        color: "#FFFFFF",
+        fontSize: 12,
+        margin: 2
+    }
+})
+
 
 export default AcaoPesquisa

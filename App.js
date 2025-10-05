@@ -25,7 +25,7 @@ const App = () => {
                 <Stack.Screen name="ModificarPesquisa" component={ModificarPesquisa} options={{ headerTitle: 'Modificar Pesquisa'}} />
                 <Stack.Screen name="Coleta" component={Coleta} options={{ headerTitle: 'Coleta de dados'}} />
                 <Stack.Screen name="Relatorio" component={Relatorio} options={{ headerTitle: 'Relatório'}} />
-                <Stack.Screen name="AcaoPesquisa" component={AcaoPesquisa} options={{ headerShown: false }} />
+                <Stack.Screen name="AcaoPesquisa" component={AcaoPesquisa} options={{ headerTitle: 'Nome da Pesquisa' }} />
                 <Stack.Screen name="Agradecimento" component={Agradecimento} options={{headerShown: false}} />
             </Stack.Navigator>
         </NavigationContainer>
