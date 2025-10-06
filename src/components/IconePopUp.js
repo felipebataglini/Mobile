@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Modal } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
-const IconePopUp = ({ props }) => {
+const IconePopUp = ({ navigation }) => {
   const [visivel, setVisivel] = useState(false);
 
   return (
@@ -33,7 +33,7 @@ const IconePopUp = ({ props }) => {
                 style={[estilos.botao, estilos.botaoApagar]}
                 onPress={() => {
                   setVisivel(false);
-                  props.navigation.navigate("Drawer");
+                  navigation.navigate("Drawer");
                 }}
               >
                 <Text style={estilos.textoBotao}>SIM</Text>

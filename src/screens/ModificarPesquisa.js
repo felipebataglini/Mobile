@@ -48,7 +48,7 @@ const ModificarPesquisa = (props) => {
                             <Botao texto="SALVAR" funcao={salvar} cor='#37BD6D' altura={25}/> 
                         </View>
                         <View style={{ marginLeft: 75}}>
-                            <IconePopUp props={props} />
+                            <IconePopUp navigation={props.navigation} />
                         </View>
                     </View>
                 </View>
