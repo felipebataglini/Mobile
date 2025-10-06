@@ -16,7 +16,7 @@ const Stack = createStackNavigator()
 const App = () => {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Login" screenOptions={{headerTintColor: '#573FBA', headerStyle: { backgroundColor: '#2B1D62' }, headerTitleStyle: { fontFamily: 'AveriaLibre-Regular', color: '#FFFFFF'}}}>
+            <Stack.Navigator initialRouteName="Login" screenOptions={{headerTintColor: '#573FBA', headerStyle: { backgroundColor: '#2B1D62', height: 40 }, headerTitleStyle: { fontFamily: 'AveriaLibre-Regular', color: '#FFFFFF', fontSize: 22}}}>
                 <Stack.Screen name="Login" component={Login} options={{headerShown: false}} />
                 <Stack.Screen name="Drawer" component={Drawer} options={{headerShown: false}}/>
                 <Stack.Screen name="Cadastro" component={Cadastro} options={{ headerTitle: 'Nova Conta'}} />
@@ -25,7 +25,7 @@ const App = () => {
                 <Stack.Screen name="ModificarPesquisa" component={ModificarPesquisa} options={{ headerTitle: 'Modificar Pesquisa'}} />
                 <Stack.Screen name="Coleta" component={Coleta} options={{ headerShown: false}} />
                 <Stack.Screen name="Relatorio" component={Relatorio} options={{ headerTitle: 'Relatório'}} />
-                <Stack.Screen name="AcaoPesquisa" component={AcaoPesquisa} options={{ headerTitle: 'Nome da Pesquisa' }} />
+                <Stack.Screen name="AcaoPesquisa" component={AcaoPesquisa} options={{ headerTitle: 'Carnaval' }} />
                 <Stack.Screen name="Agradecimento" component={Agradecimento} options={{headerShown: false}} />
             </Stack.Navigator>
         </NavigationContainer>

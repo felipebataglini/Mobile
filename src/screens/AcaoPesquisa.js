@@ -20,17 +20,17 @@ const AcaoPesquisa = (props) => {
         <View style={estilos.container}>
             <View style={{ flexDirection: 'row', width: '90%', justifyContent: 'space-between' }}>
                 <TouchableOpacity style={estilos.card} onPress={modificar} activeOpacity={0.7}>
-                    <Icon name="edit-note" size={30} color='#FFFFFF' />
+                    <Icon name="edit-note" size={70} color='#FFFFFF' />
                     <Text style={estilos.descricao}>Modificar</Text>  
                 </TouchableOpacity>
 
                 <TouchableOpacity style={estilos.card} onPress={coletar} activeOpacity={0.7}>
-                    <Icon name="library-add-check" size={30} color='#FFFFFF' />
+                    <Icon name="library-add-check" size={70} color='#FFFFFF' />
                     <Text style={estilos.descricao}>Coletar dados</Text>    
                 </TouchableOpacity> 
 
                 <TouchableOpacity style={estilos.card} onPress={gerarRelatorio} activeOpacity={0.7}>
-                    <Icon name="donut-large" size={30} color='#FFFFFF' />
+                    <Icon name="donut-large" size={70} color='#FFFFFF' />
                     <Text style={estilos.descricao}>Relatório</Text>    
                 </TouchableOpacity> 
 
@@ -48,8 +48,8 @@ const estilos = StyleSheet.create({
     },
     card: {
         backgroundColor: '#312464',
-        width: 90,
-        height: 100,
+        width: 170,
+        height: 150,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 5,
@@ -58,7 +58,7 @@ const estilos = StyleSheet.create({
     descricao: {
         fontFamily: 'AveriaLibre-Regular',
         color: "#FFFFFF",
-        fontSize: 12,
+        fontSize: 20,
         margin: 2
     }
 })

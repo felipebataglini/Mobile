@@ -19,17 +19,20 @@ const Home = (props) => {
 
     return (
         <View style={estilos.container}>
-            <View style={{ height: '20%', width: '90%', justifyContent: 'center' }}>
-                <TextInput mode='outlined' placeholder='Insira o termo de busca...' value={texto} onChangeText={setTexto}
+            <View style={{ height: '20%', width: '90%', justifyContent: 'center', marginVertical: 2 }}>
+                <TextInput mode='outlined' placeholder='Insira o termo de busca...' value={texto} onChangeText={setTexto} placeholderTextColor={'#8B8B8B'}
                     left={<TextInput.Icon icon="magnify" color="#8B8B8B" />} style={estilos.input} activeOutlineColor='#2B1D62' 
                     theme={{
                         colors: {
                             text: 'black',
-                            placeholder: '#8B8B8B'
-                        }}}
+                        },
+                        fonts: {
+                            bodyLarge: { fontFamily: 'AveriaLibre-Regular'}
+                        }
+                    }}
                 />
             </View>
-            <View style={{ height: '35%', width: '90%'}}>
+            <View style={{ height: '55%', width: '90%', marginTop: 10}}>
                 <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 10 }}>
                     <CardPesquisa imagem={require('../../assets/images/secomp.png')} titulo="SECOMP 2023" subtitulo="10/10/2023" funcao={opcoesPesquisa} />
                     <CardPesquisa imagem={require('../../assets/images/ubuntu.png')} titulo="UBUNTU 2022" subtitulo="05/06/2022" funcao={opcoesPesquisa} />
@@ -38,8 +41,8 @@ const Home = (props) => {
                     <CardPesquisa imagem={require('../../assets/images/carnaval.png')} titulo="CARNAVAL" subtitulo="15/02/2020" funcao={opcoesPesquisa} />
                 </ScrollView>
             </View>
-            <View style={{ height: '25%', width: '90%'}}>
-                <Botao texto='NOVA PESQUISA' funcao={cadastrarPesquisa} cor='#37BD6D'></Botao>
+            <View style={{ height: '25%', width: '90%', marginTop: 5}}>
+                <Botao texto='NOVA PESQUISA' funcao={cadastrarPesquisa} cor='#37BD6D' altura={25}></Botao>
             </View>
         </View>
     )
@@ -48,14 +51,13 @@ const Home = (props) => {
 const estilos = StyleSheet.create({
     container: {
         backgroundColor: '#372775',
-        justifyContent: 'space-between',
         alignItems: 'center',
         flex: 1
     },
     input: {
         fontSize: 14,
         backgroundColor: '#FFFFFF',
-        height: 40
+        height: 25
     }
 });
 

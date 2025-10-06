@@ -18,18 +18,34 @@ const theme = {
 const Recuperacao = (props) => {
 
     const[email, setEmail] = React.useState("")
+    const[erroEmail, setErroEmail] = React.useState("")
+
+    const validarEmail = (texto) => {
+
+        setEmail(texto);
+
+        if(texto.trim() === '') {
+            setErroEmail("O campo e-mail não pode ficar vazio") ;
+        } else if(!texto.includes('@')) {
+            setErroEmail("Digite um e-mail válido")
+        } else {
+            setErroEmail('');
+        }
+    }
 
     const recuperar = () => {
-        props.navigation.goBack()
+        if(erroEmail==="") {
+            props.navigation.goBack()
+        }
         //Lógica recuperação conta futuramente (parte 2)
     }
 
     return (
         <PaperProvider theme={theme}>
             <View style={estilos.container}>
-                <View style={{width: '70%', height: '50%', justifyContent: 'space-between', marginTop: 170}}>
-                    <CampoTexto texto="E-mail" value={email} onChangeText={setEmail} tipoTeclado="email-address" secure={false} />
-                    <Botao texto="RECUPERAR" funcao={recuperar} cor='#37BD6D' />
+                <View style={{width: '70%', height: '55%', justifyContent: 'space-between', marginTop: 65}}>
+                    <CampoTexto texto="E-mail" value={email} funcao={validarEmail} tipoTeclado="email-address" secure={false} erro={erroEmail} />
+                    <Botao texto="RECUPERAR" funcao={recuperar} cor='#37BD6D' altura="25" />
                 </View>
             </View>
         </PaperProvider>

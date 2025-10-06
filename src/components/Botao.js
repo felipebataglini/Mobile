@@ -5,7 +5,7 @@ const Botao = (props) => {
     const texto = props.texto
 
     return (
-        <TouchableOpacity style={{backgroundColor: props.cor, alignItems: 'center', justifyContent: 'center', marginBottom: 10, marginTop: 10, height: 50}} onPress={props.funcao}>
+        <TouchableOpacity style={estilos.botao} onPress={props.funcao}>
                 <Text style={estilos.texto}>{texto}</Text>
         </TouchableOpacity>
     )
@@ -16,6 +16,13 @@ const estilos = StyleSheet.create({
         fontSize: 16,
         color: 'white',
         fontFamily: 'AveriaLibre-Regular'
+    },
+    botao: {
+        backgroundColor: props.cor,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginVertical: 5,
+        height: props.altura
     }
 })
 export default Botao

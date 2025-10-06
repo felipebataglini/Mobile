@@ -17,7 +17,7 @@ const estilos = StyleSheet.create({
         width: 150,
         marginHorizontal: 10,
         alignItems: 'center',
-        borderRadius: 10,
+        borderRadius: 5,
         padding: 10
     },
     imagem: {
@@ -26,7 +26,7 @@ const estilos = StyleSheet.create({
         marginVertical: 5
     },
     titulo: {
-        fontSize: 16,
+        fontSize: 18,
         color: '#3F92C5',
         fontFamily: 'AveriaLibre-Regular'
     },
