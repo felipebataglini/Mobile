@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { PaperProvider, MD3LightTheme as DefaultTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-// Tema consistente com as outras telas
 const theme = {
     ...DefaultTheme,
     colors: {
@@ -20,8 +19,8 @@ const Coleta = (props) => {
         props.navigation.navigate('Agradecimento'); 
     };
 
-    // NOVA FUNÇÃO: Navega para Ações Pesquisa ao clicar no canto superior direito
-    const navigateToAcoesPesquisa = () => {
+    // Navega para a home ao clicar no canto superior direito
+    const navigateToDrawer = () => {
         props.navigation.navigate('Drawer');
     };
 
@@ -29,10 +28,10 @@ const Coleta = (props) => {
         <PaperProvider theme={theme}>
             <View style={styles.container}>
 
-                {/* NOVO BOTÃO: Área clicável invisível no canto superior direito */}
+                {/* Área clicável invisível no canto superior direito */}
                 <TouchableOpacity 
-                    style={styles.hiddenButton} 
-                    onPress={navigateToAcoesPesquisa} 
+                    style={styles.botaoEscondido} 
+                    onPress={navigateToDrawer} 
                 />
 
                 <Text style={styles.questionText}>
@@ -82,8 +81,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         padding: 20,
     },
-    // NOVO ESTILO: Para o botão invisível
-    hiddenButton: {
+    botaoEscondido: {
         position: 'absolute',
         top: 0,
         right: 0,
@@ -93,7 +91,7 @@ const styles = StyleSheet.create({
     },
     questionText: {
         color: '#FFFFFF',
-        fontFamily: 'Averia Libre',
+        fontFamily: 'AveriaLibre-Regular',
         fontSize: 24,
         fontWeight: '400',
         textAlign: 'center',
@@ -109,7 +107,7 @@ const styles = StyleSheet.create({
     },
     labelText: {
         color: '#FFFFFF',
-        fontFamily: 'Averia Libre',
+        fontFamily: 'AveriaLibre-Regular',
         fontSize: 18,
         fontWeight: '400',
         marginTop: 10,

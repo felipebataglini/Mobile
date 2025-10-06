@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { PaperProvider, MD3LightTheme as DefaultTheme } from 'react-native-paper';
 
-// Tema consistente com as outras telas
 const theme = {
     ...DefaultTheme,
     colors: {
@@ -46,7 +45,7 @@ const estilos = StyleSheet.create({
     },
     texto: {
         color: '#FFFFFF',
-        fontFamily: 'Averia Libre',
+        fontFamily: 'AveriaLibre-Regular',
         fontWeight: '400',
         fontSize: 24,
         textAlign: 'center',
