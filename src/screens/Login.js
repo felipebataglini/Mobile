@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet} from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import Botao from '../components/Botao'
-import { PaperProvider, MD3LightTheme as DefaultTheme} from 'react-native-paper'
+import { PaperProvider, MD3LightTheme as DefaultTheme } from 'react-native-paper'
 import CampoTexto from '../components/CampoTexto'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
@@ -25,9 +25,9 @@ const Login = (props) => {
 
         setEmail(texto);
 
-        if(texto.trim() === '') {
-            setErroEmail("O campo e-mail não pode ficar vazio") ;
-        } else if(!texto.includes('@')) {
+        if (texto.trim() === '') {
+            setErroEmail("O campo e-mail não pode ficar vazio");
+        } else if (!texto.includes('@')) {
             setErroEmail("Digite um e-mail válido")
         } else {
             setErroEmail('');
@@ -37,16 +37,16 @@ const Login = (props) => {
     const validarSenha = (texto) => {
         setSenha(texto);
 
-        if(texto.trim() === '') {
-            setErroSenha("O campo senha não pode ficar vazio") ;
+        if (texto.trim() === '') {
+            setErroSenha("O campo senha não pode ficar vazio");
         } else {
             setErroSenha('');
         }
     }
 
     const logar = () => {
-        
-        if (erroEmail ==="" && erroSenha==="") {
+
+        if (erroEmail === "" && erroSenha === "") {
             props.navigation.navigate("Drawer");
         }
     };
@@ -61,18 +61,18 @@ const Login = (props) => {
     return (
         <PaperProvider theme={theme}>
             <View style={estilos.container}>
-                <View style={{height: '15%', flexDirection: 'row', alignItems: 'center', marginTop: 10}}>
+                <View style={{ height: '15%', flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
                     <Text style={estilos.titulo}>Satisfying.you</Text>
                     <Icon name="sentiment-satisfied-alt" size={35} color='#FFFFFF' />
                 </View>
-                <View style={{height: '55%', width: '60%', justifyContent: 'space-between'}}>
+                <View style={{ height: '55%', width: '60%', justifyContent: 'space-between' }}>
                     <CampoTexto texto="E-mail" value={email} funcao={validarEmail} tipoTeclado="email-address" secure={false} erro={erroEmail} />
-                    <CampoTexto texto="Senha" value={senha} funcao={validarSenha} secure={true}  erro={erroSenha} />
+                    <CampoTexto texto="Senha" value={senha} funcao={validarSenha} secure={true} erro={erroSenha} />
                     <Botao texto='Entrar' funcao={logar} cor='#37BD6D' altura={25} />
                 </View>
-                <View style={{height: '20%', width: '60%', marginVertical: 20, justifyContent: 'center'}}>
+                <View style={{ height: '20%', width: '60%', marginVertical: 20, justifyContent: 'center' }}>
                     <Botao texto='Criar minha conta' funcao={cadastrar} cor='#419ED7' altura={20} />
-                    <Botao texto='Esqueci minha senha' funcao={recuperar} cor='#B0CCDE' altura={20}/>
+                    <Botao texto='Esqueci minha senha' funcao={recuperar} cor='#B0CCDE' altura={20} />
                 </View>
             </View>
         </PaperProvider>
