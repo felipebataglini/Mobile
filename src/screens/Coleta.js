@@ -29,7 +29,6 @@ const Coleta = (props) => {
                 const docRef = doc(db, "pesquisas", pesquisa.id);
                 
                 // Atualiza o documento incrementando em 1 o campo do sentimento escolhido
-                // Ex: se sentimento for 'bom', vai fazer { bom: increment(1) }
                 await updateDoc(docRef, {
                     [sentimento]: increment(1)
                 });

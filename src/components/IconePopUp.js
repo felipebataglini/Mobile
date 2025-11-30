@@ -8,7 +8,7 @@ const IconePopUp = ({ navigation, idPesquisa }) => {
   const [visivel, setVisivel] = useState(false);
 
   const apagarPesquisa = async () => {
-    // BLINDAGEM: Verifica se o ID existe antes de tentar apagar
+    // Verifica se o ID existe antes de tentar apagar
     if (!idPesquisa) {
       console.error("Erro: ID da pesquisa não fornecido para exclusão.");
       return;
@@ -18,7 +18,6 @@ const IconePopUp = ({ navigation, idPesquisa }) => {
         await deleteDoc(doc(db, "pesquisas", idPesquisa));
         setVisivel(false);
         
-        // CORREÇÃO: Navega para 'Drawer' em vez de 'Home'
         // Isso garante o retorno correto à tela inicial dentro do contexto do menu lateral
         navigation.navigate("Drawer"); 
         

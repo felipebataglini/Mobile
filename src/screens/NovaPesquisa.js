@@ -87,7 +87,7 @@ const NovaPesquisa = (props) => {
     return (
         <PaperProvider theme={theme}>
             <View style={estilos.container}>
-                {/* ScrollView opcional caso a tela seja pequena */}
+                {/* ScrollView tela pequena */}
                 <ScrollView contentContainerStyle={estilos.scrollContainer} showsVerticalScrollIndicator={false}>
                     
                     <View style={estilos.inputContainer}>
@@ -131,12 +131,12 @@ const estilos = StyleSheet.create({
     },
     scrollContainer: {
         alignItems: 'center',
-        paddingTop: 30, // Espaço do topo
+        paddingTop: 30,
         paddingBottom: 20
     },
     inputContainer: {
-        width: '75%', // Aumentado para ocupar melhor a tela
-        marginBottom: 20 // Garante proximidade mas com respiro
+        width: '75%',
+        marginBottom: 20
     },
     botaoContainer: {
         width: '75%',
@@ -156,7 +156,7 @@ const estilos = StyleSheet.create({
     boxImagem: { 
         backgroundColor: '#FFFFFF', 
         height: 80, 
-        width: '100%', // Ocupa a largura do container pai (75%)
+        width: '100%',
         justifyContent: 'center', 
         alignItems: 'center' 
     }

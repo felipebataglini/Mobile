@@ -51,7 +51,7 @@ const Home = (props) => {
                     {listaPesquisas.map((item) => (
                         <CardPesquisa 
                             key={item.id}
-                            // Assume que imagem é uma URL. Se for local, lógica precisa ser ajustada.
+                            // Assume que imagem é uma URL.
                             imagem={{ uri: item.imagem }} 
                             titulo={item.nome} 
                             subtitulo={item.data} 

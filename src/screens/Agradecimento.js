@@ -42,7 +42,7 @@ const estilos = StyleSheet.create({
     },
     texto: {
         color: '#FFFFFF',
-        fontFamily: 'AveriaLibre-Regular', // Certifique-se que o nome da fonte está correto no seu projeto
+        fontFamily: 'AveriaLibre-Regular',
         fontWeight: '400',
         fontSize: 24,
         textAlign: 'center',
