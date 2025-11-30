@@ -1,30 +1,24 @@
-// Import the functions you need from the SDKs you need
-
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
-// TODO: Add SDKs for Firebase products that you want to use
-
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-
-// Your web app's Firebase configuration
-
+// Configurações do seu projeto "mobile-b33b9"
 const firebaseConfig = {
-
-  apiKey: "AIzaSyBKeGFxoUDZfvzLaiJYNIzmzn1DL21Cllk",
-  authDomain: "projetomobile-afab9.firebaseapp.com",
-  projectId: "projetomobile-afab9",
-  storageBucket: "projetomobile-afab9.firebasestorage.app",
-  messagingSenderId: "456106851743",
-  appId: "1:456106851743:web:a3d7836b103004845291aa"
+  apiKey: "AIzaSyD9KHeaR1lyWYYG9tSViaLZgE5wCqrjdSs",
+  authDomain: "mobile-b33b9.firebaseapp.com",
+  projectId: "mobile-b33b9",
+  storageBucket: "mobile-b33b9.firebasestorage.app",
+  messagingSenderId: "173684871472",
+  appId: "1:173684871472:web:ceafbf3cf6795cc5d3b8f5",
+  measurementId: "G-FGXXJ7TDR4"
 };
 
-
-// Initialize Firebase
-
+// Inicializa o Firebase
 const app = initializeApp(firebaseConfig);
 
+// Inicializa a Autenticação e o Banco de Dados
 const auth_mod = getAuth(app);
+const db = getFirestore(app);
 
-export { auth_mod }
+// Exporta para ser usado no restante do app
+export { auth_mod, db };

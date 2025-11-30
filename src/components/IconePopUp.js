@@ -1,9 +1,31 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Modal } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import { db } from '../firebase/config'
+import { doc, deleteDoc } from "firebase/firestore";
 
-const IconePopUp = ({ navigation }) => {
+const IconePopUp = ({ navigation, idPesquisa }) => {
   const [visivel, setVisivel] = useState(false);
+
+  const apagarPesquisa = async () => {
+    // BLINDAGEM: Verifica se o ID existe antes de tentar apagar
+    if (!idPesquisa) {
+      console.error("Erro: ID da pesquisa não fornecido para exclusão.");
+      return;
+    }
+
+    try {
+        await deleteDoc(doc(db, "pesquisas", idPesquisa));
+        setVisivel(false);
+        
+        // CORREÇÃO: Navega para 'Drawer' em vez de 'Home'
+        // Isso garante o retorno correto à tela inicial dentro do contexto do menu lateral
+        navigation.navigate("Drawer"); 
+        
+    } catch (error) {
+        console.error("Erro ao apagar: ", error);
+    }
+  }
 
   return (
     <View style={estilos.container}>
@@ -31,10 +53,7 @@ const IconePopUp = ({ navigation }) => {
             <View style={estilos.linhaBotoes}>
               <TouchableOpacity
                 style={[estilos.botao, estilos.botaoApagar]}
-                onPress={() => {
-                  setVisivel(false);
-                  navigation.navigate("Drawer");
-                }}
+                onPress={apagarPesquisa}
               >
                 <Text style={estilos.textoBotao}>SIM</Text>
               </TouchableOpacity>

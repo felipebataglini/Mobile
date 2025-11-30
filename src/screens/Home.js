@@ -1,20 +1,42 @@
-import { View, Text, StyleSheet, ScrollView } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { View, StyleSheet, ScrollView } from 'react-native'
 import Botao from '../components/Botao'
 import { TextInput } from 'react-native-paper'
-import React from 'react'
 import CardPesquisa from '../components/CardPesquisa'
-
+import { db } from '../firebase/config'
+import { collection, onSnapshot, query } from "firebase/firestore";
 
 const Home = (props) => {
 
-    const[texto, setTexto] = React.useState('');
+    const[texto, setTexto] = useState('');
+    const[listaPesquisas, setListaPesquisas] = useState([]);
+
+    useEffect(() => {
+        // Cria a query para buscar na coleção 'pesquisas'
+        const q = query(collection(db, "pesquisas"));
+        
+        // Inscreve um listener para atualizações em tempo real
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            const pesquisas = [];
+            querySnapshot.forEach((doc) => {
+                pesquisas.push({
+                    id: doc.id,
+                    ...doc.data()
+                });
+            });
+            setListaPesquisas(pesquisas);
+        });
+
+        return () => unsubscribe();
+    }, []);
 
     const cadastrarPesquisa = () => {
         props.navigation.navigate('NovaPesquisa')
     }
 
-    const opcoesPesquisa = () => {
-        props.navigation.navigate('AcaoPesquisa')
+    // Passa o objeto pesquisa inteiro para a próxima tela
+    const irParaAcoes = (pesquisa) => {
+        props.navigation.navigate('AcaoPesquisa', { pesquisa })
     }
 
     return (
@@ -22,23 +44,20 @@ const Home = (props) => {
             <View style={{ height: '20%', width: '90%', justifyContent: 'center', marginVertical: 2 }}>
                 <TextInput mode='outlined' placeholder='Insira o termo de busca...' value={texto} onChangeText={setTexto} placeholderTextColor={'#8B8B8B'}
                     left={<TextInput.Icon icon="magnify" color="#8B8B8B" />} style={estilos.input} activeOutlineColor='#2B1D62' 
-                    theme={{
-                        colors: {
-                            text: 'black',
-                        },
-                        fonts: {
-                            bodyLarge: { fontFamily: 'AveriaLibre-Regular'}
-                        }
-                    }}
                 />
             </View>
             <View style={{ height: '55%', width: '90%', marginTop: 10}}>
                 <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 10 }}>
-                    <CardPesquisa imagem={require('../../assets/images/secomp.png')} titulo="SECOMP 2023" subtitulo="10/10/2023" funcao={opcoesPesquisa} />
-                    <CardPesquisa imagem={require('../../assets/images/ubuntu.png')} titulo="UBUNTU 2022" subtitulo="05/06/2022" funcao={opcoesPesquisa} />
-                    <CardPesquisa imagem={require('../../assets/images/meninasCPU.png')} titulo="MENINAS CPU" subtitulo="01/04/2022" funcao={opcoesPesquisa} />
-                    <CardPesquisa imagem={require('../../assets/images/COTB.png')} titulo="COTB" subtitulo="01/04/2022" funcao={opcoesPesquisa} />
-                    <CardPesquisa imagem={require('../../assets/images/carnaval.png')} titulo="CARNAVAL" subtitulo="15/02/2020" funcao={opcoesPesquisa} />
+                    {listaPesquisas.map((item) => (
+                        <CardPesquisa 
+                            key={item.id}
+                            // Assume que imagem é uma URL. Se for local, lógica precisa ser ajustada.
+                            imagem={{ uri: item.imagem }} 
+                            titulo={item.nome} 
+                            subtitulo={item.data} 
+                            funcao={() => irParaAcoes(item)} 
+                        />
+                    ))}
                 </ScrollView>
             </View>
             <View style={{ height: '25%', width: '90%', marginTop: 5}}>
@@ -49,16 +68,8 @@ const Home = (props) => {
 }
 
 const estilos = StyleSheet.create({
-    container: {
-        backgroundColor: '#372775',
-        alignItems: 'center',
-        flex: 1
-    },
-    input: {
-        fontSize: 14,
-        backgroundColor: '#FFFFFF',
-        height: 25
-    }
+    container: { backgroundColor: '#372775', alignItems: 'center', flex: 1 },
+    input: { fontSize: 14, backgroundColor: '#FFFFFF', height: 25 }
 });
 
 export default Home

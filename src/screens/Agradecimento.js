@@ -13,17 +13,14 @@ const theme = {
 
 const Agradecimento = (props) => {
 
-    // useEffect é executado uma vez quando o componente é montado
     useEffect(() => {
-        // Inicia um timer de 3000 milissegundos (3 segundos)
         const timer = setTimeout(() => {
-            // Após 3 segundos, navega para a tela 'Coleta'
-            props.navigation.replace('Coleta');
+            // Retorna para o Drawer (menu principal) após 3 segundos
+            props.navigation.navigate('Drawer');
         }, 3000);
 
-        // Função de limpeza: cancela o timer se o componente for desmontado
         return () => clearTimeout(timer);
-    }, []); // O array vazio [] garante que o efeito rode apenas uma vez
+    }, []); 
 
     return (
         <PaperProvider theme={theme}>
@@ -45,7 +42,7 @@ const estilos = StyleSheet.create({
     },
     texto: {
         color: '#FFFFFF',
-        fontFamily: 'AveriaLibre-Regular',
+        fontFamily: 'AveriaLibre-Regular', // Certifique-se que o nome da fonte está correto no seu projeto
         fontWeight: '400',
         fontSize: 24,
         textAlign: 'center',

@@ -1,19 +1,22 @@
-import { View, TouchableOpacity, StyleSheet } from 'react-native'
-import { Text } from 'react-native-gesture-handler'
+import { View, TouchableOpacity, StyleSheet, Text } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
 const AcaoPesquisa = (props) => {
 
+    // Recebe o objeto pesquisa vindo da navegação
+    const { pesquisa } = props.route.params;
+
     const modificar = () => {
-        props.navigation.navigate('ModificarPesquisa')
+        // Envia os dados para a tela de modificação
+        props.navigation.navigate('ModificarPesquisa', { pesquisa })
     }
 
     const coletar = () => {
-        props.navigation.navigate('Coleta')
+        props.navigation.navigate('Coleta', { pesquisa })
     }
     
     const gerarRelatorio = () => {
-        props.navigation.navigate('Relatorio')
+        props.navigation.navigate('Relatorio', { pesquisa })
     }
 
     return (
@@ -33,35 +36,15 @@ const AcaoPesquisa = (props) => {
                     <Icon name="donut-large" size={70} color='#FFFFFF' />
                     <Text style={estilos.descricao}>Relatório</Text>    
                 </TouchableOpacity> 
-
             </View>
         </View>
     )
 }
 
 const estilos = StyleSheet.create({
-    container: {
-        backgroundColor: '#372775',
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    card: {
-        backgroundColor: '#312464',
-        width: 170,
-        height: 150,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 5,
-        padding: 5
-    },
-    descricao: {
-        fontFamily: 'AveriaLibre-Regular',
-        color: "#FFFFFF",
-        fontSize: 20,
-        margin: 2
-    }
+    container: { backgroundColor: '#372775', flex: 1, alignItems: 'center', justifyContent: 'center' },
+    card: { backgroundColor: '#312464', width: 170, height: 150, justifyContent: 'center', alignItems: 'center', borderRadius: 5, padding: 5 },
+    descricao: { fontFamily: 'AveriaLibre-Regular', color: "#FFFFFF", fontSize: 20, margin: 2 }
 })
-
 
 export default AcaoPesquisa
