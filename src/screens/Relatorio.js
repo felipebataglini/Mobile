@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, StyleSheet, ScrollView } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import PieChart from 'react-native-pie-chart'
 import { db } from '../firebase/config'
 import { doc, onSnapshot } from "firebase/firestore"
@@ -7,78 +7,88 @@ import { doc, onSnapshot } from "firebase/firestore"
 const Relatorio = (props) => {
 
     const pesquisa = props.route.params?.pesquisa || {};
+    const [series, setSeries] = useState([0, 0, 0, 0, 0]);
+    const [sliceColor, setSliceColor] = useState([]);
 
-    const [dadosBrutos, setDadosBrutos] = useState([0, 0, 0, 0, 0])
-    
-    // Cores fixas: [Péssimo, Ruim, Neutro, Bom, Excelente]
-    const coresFixas = ['#D16D6D', '#D1946D', '#D1C86D', '#A7D16D', '#6AD16D']
+    // Ordem dos dados: [Excelente, Bom, Neutro, Ruim, Péssimo] para bater com a legenda
+    const coresPadrao = ['#F1CE7E', '#6994FE', '#5FCDA4', '#EA7288', '#53D8D8'];
 
     useEffect(() => {
         if (pesquisa.id) {
             const unsub = onSnapshot(doc(db, "pesquisas", pesquisa.id), (doc) => {
                 if (doc.exists()) {
                     const data = doc.data();
-                    const pessimo = data.pessimo || 0;
-                    const ruim = data.ruim || 0;
-                    const neutro = data.neutro || 0;
-                    const bom = data.bom || 0;
-                    const excelente = data.excelente || 0;
+                    
+                    // Mapeia os dados do banco
+                    const valoresBrutos = [
+                        data.excelente || 0,
+                        data.bom || 0,
+                        data.neutro || 0,
+                        data.ruim || 0,
+                        data.pessimo || 0
+                    ];
 
-                    setDadosBrutos([pessimo, ruim, neutro, bom, excelente]);
+                    // Filtra apenas valores maiores que 0 para não quebrar o gráfico
+                    const seriesFiltrada = [];
+                    const coresFiltradas = [];
+
+                    valoresBrutos.forEach((valor, index) => {
+                        if (valor > 0) {
+                            seriesFiltrada.push(valor);
+                            coresFiltradas.push(coresPadrao[index]);
+                        }
+                    });
+
+                    setSeries(seriesFiltrada);
+                    setSliceColor(coresFiltradas);
                 }
             });
             return () => unsub();
         }
     }, [pesquisa.id]);
 
-    // Filtra valores 0 para evitar erro no gráfico
-    const seriesFiltrada = [];
-    const coresFiltradas = [];
-
-    dadosBrutos.forEach((valor, index) => {
-        if (valor > 0) {
-            seriesFiltrada.push(valor);
-            coresFiltradas.push(coresFixas[index]);
-        }
-    });
-
-    const totalVotos = dadosBrutos.reduce((a, b) => a + b, 0);
+    const totalVotos = series.reduce((a, b) => a + b, 0);
 
     return (
         <View style={estilos.container}>
             {totalVotos > 0 ? (
-                // MUDANÇA: flexDirection 'row' para colocar lado a lado
-                <View style={estilos.chartContainer}>
+                <View style={estilos.contentRow}>
                     <PieChart
                         widthAndHeight={250}
-                        series={seriesFiltrada}
-                        sliceColor={coresFiltradas}
+                        series={series}
+                        sliceColor={sliceColor}
                         coverRadius={0}
                         coverFill={'#FFF'}
                     />
-                    
-                    {/* Legenda */}
                     <View style={estilos.legendaContainer}>
-                        <LegendaItem cor="#D1C86D" texto="Neutro" />
-                        <LegendaItem cor="#D1946D" texto="Ruim" />
-                        <LegendaItem cor="#D16D6D" texto="Péssimo" />
-                        <LegendaItem cor="#A7D16D" texto="Bom" />
-                        <LegendaItem cor="#6AD16D" texto="Excelente" />
+                        <View style={estilos.itemLegenda}>
+                            <View style={[estilos.quadradoCor, { backgroundColor: '#F1CE7E' }]} />
+                            <Text style={estilos.textoLegenda}>Excelente</Text>
+                        </View>
+                        <View style={estilos.itemLegenda}>
+                            <View style={[estilos.quadradoCor, { backgroundColor: '#6994FE' }]} />
+                            <Text style={estilos.textoLegenda}>Bom</Text>
+                        </View>
+                        <View style={estilos.itemLegenda}>
+                            <View style={[estilos.quadradoCor, { backgroundColor: '#5FCDA4' }]} />
+                            <Text style={estilos.textoLegenda}>Neutro</Text>
+                        </View>
+                        <View style={estilos.itemLegenda}>
+                            <View style={[estilos.quadradoCor, { backgroundColor: '#EA7288' }]} />
+                            <Text style={estilos.textoLegenda}>Ruim</Text>
+                        </View>
+                        <View style={estilos.itemLegenda}>
+                            <View style={[estilos.quadradoCor, { backgroundColor: '#53D8D8' }]} />
+                            <Text style={estilos.textoLegenda}>Péssimo</Text>
+                        </View>
                     </View>
                 </View>
             ) : (
-                <Text style={estilos.textoAviso}>Essa pesquisa ainda não possui dados coletados.</Text>
+                <Text style={estilos.textoAviso}>Não há dados para esta pesquisa.</Text>
             )}
         </View>
     )
 }
-
-const LegendaItem = ({ cor, texto }) => (
-    <View style={estilos.itemLegenda}>
-        <View style={[estilos.quadradoCor, { backgroundColor: cor }]} />
-        <Text style={estilos.textoLegenda}>{texto}</Text>
-    </View>
-)
 
 const estilos = StyleSheet.create({
     container: {
@@ -87,26 +97,22 @@ const estilos = StyleSheet.create({
         justifyContent: 'center',
         flex: 1
     },
-    chartContainer: {
-        flexDirection: 'row', // <--- MUDANÇA PRINCIPAL: Alinha horizontalmente
+    contentRow: {
+        flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center',
-        width: '100%',
-        paddingHorizontal: 10
+        justifyContent: 'center'
     },
     legendaContainer: {
-        marginLeft: 20, // <--- Adiciona espaço entre o gráfico e a legenda
-        justifyContent: 'center'
+        marginLeft: 20
     },
     itemLegenda: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 10 // Aumentei um pouco o espaço entre os itens
+        marginBottom: 10
     },
     quadradoCor: {
         width: 20,
         height: 20,
-        borderRadius: 5,
         marginRight: 10
     },
     textoLegenda: {
@@ -117,9 +123,7 @@ const estilos = StyleSheet.create({
     textoAviso: {
         color: '#FFFFFF',
         fontFamily: 'AveriaLibre-Regular',
-        fontSize: 20,
-        textAlign: 'center',
-        padding: 20
+        fontSize: 20
     }
 })
 
