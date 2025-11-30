@@ -60,37 +60,37 @@ const Cadastro = (props) => {
         }
     }
 
-    const cadastrar = () => {
-        if (senha == verificaSenha) {
-            createUserWithEmailAndPassword(auth_mod, email, senha)
-                .then((userCredential) => {
-                    setindicadorAtv(true);
-                    const timer = setTimeout(() => {
-                        props.navigation.navigate("Login");
-                        setindicadorAtv(false);
-                    }, 3000);
-                }).catch((error) => {
-                    switch (error.code) {
-                        case "auth/missing-email":
-                            setErroEmail("O campo e-mail não pode ficar vazio.");
-                            break;
-                        case "auth/invalid-email":
-                            setErroEmail("Email inválido.");
-                            break;
-                        case "auth/email-already-in-use":
-                            setErroEmail("Este e-mail já está em uso.");
-                            break;
-                        case "auth/weak-password":
-                            setErroSenha("Sua senha deve ter no mínimo 6 caracteres.")
-                            break;
-                        case "auth/missing-password":
-                            setErroSenha("Este campo não pode ficar vazio.")
-                            break;
-                        default:
-                            setErroEmail("");
-                            break;
-                    }
-                });
+const cadastrar = () => {
+    if (senha == verificaSenha) {
+        createUserWithEmailAndPassword(auth_mod, email, senha)
+            .then((userCredential) => {
+                setindicadorAtv(true);
+                const timer = setTimeout(() => {
+                    props.navigation.navigate("Login");
+                    setindicadorAtv(false);
+                }, 3000);
+            }).catch((error) => {
+                switch (error.code) {
+                    case "auth/missing-email":
+                        setErroEmail("O campo e-mail não pode ficar vazio.");
+                        break;
+                    case "auth/invalid-email":
+                        setErroEmail("Email inválido.");
+                        break;
+                    case "auth/email-already-in-use":
+                        setErroEmail("Este e-mail já está em uso.");
+                        break;
+                    case "auth/weak-password":
+                        setErroSenha("Sua senha deve ter no mínimo 6 caracteres.")
+                        break;
+                    case "auth/missing-password":
+                        setErroSenha("O campo senha não pode ficar vazio.")
+                        break;
+                    default:
+                        setErroEmail("");
+                        break;
+                }
+            });
         }
         else {
             setErroSenha('As senhas devem ser iguais.')
@@ -137,7 +137,7 @@ const Cadastro = (props) => {
                         />
                     </View>
                     <View style={{ marginTop: 10 }}>
-                        <ActivityIndicator animating={indicadorAtv} style={{ marginBottom: 10 }} color={MD2Colors.green400} />
+                        <ActivityIndicator animating={indicadorAtv} style={{ marginBottom: 4 }} color={MD2Colors.green400} />
                         <Botao texto="CADASTRAR" funcao={cadastrar} cor='#37BD6D' altura={25} />
                     </View>
                 </View>

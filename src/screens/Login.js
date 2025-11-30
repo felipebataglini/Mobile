@@ -1,9 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native'
 import Botao from '../components/Botao'
-import { PaperProvider, MD3LightTheme as DefaultTheme } from 'react-native-paper'
+import { MD2Colors, ActivityIndicator, PaperProvider, MD3LightTheme as DefaultTheme } from 'react-native-paper'
 import CampoTexto from '../components/CampoTexto'
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import { auth_mod } from '../firebase/config';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useDispatch } from 'react-redux';
 
 const theme = {
     ...DefaultTheme,
@@ -20,6 +23,9 @@ const Login = (props) => {
     const [senha, setSenha] = React.useState("")
     const [erroEmail, setErroEmail] = React.useState("");
     const [erroSenha, setErroSenha] = React.useState("");
+    const [indicadorAtv, setindicadorAtv] = React.useState("")
+
+    const dispatch = useDispatch()
 
     const validarEmail = (texto) => {
 
@@ -47,7 +53,30 @@ const Login = (props) => {
     const logar = () => {
 
         if (erroEmail === "" && erroSenha === "") {
-            props.navigation.navigate("Drawer");
+            signInWithEmailAndPassword(auth_mod, email, senha)
+                .then((userLogged) => {
+                    setindicadorAtv(true);
+                    const timer = setTimeout(() => {
+                        props.navigation.navigate("Drawer");
+                        setindicadorAtv(false);
+                    }, 2000);
+                })
+                .catch((error) => {
+                    switch (error.code) {
+                        case "auth/invalid-email":
+                            setErroEmail("Email inválido.");
+                            break;
+                        case "auth/missing-password":
+                            setErroSenha("Digite a senha.");
+                            break;
+                        case "auth/invalid-credential":
+                            setErroSenha("Email ou senha incorreto.");
+                            break;
+                        default:
+                            setErroSenha("Erro ao realizar login.");
+                            break;
+                    }
+                })
         }
     };
 
@@ -69,6 +98,7 @@ const Login = (props) => {
                     <CampoTexto texto="E-mail" value={email} funcao={validarEmail} tipoTeclado="email-address" secure={false} erro={erroEmail} />
                     <CampoTexto texto="Senha" value={senha} funcao={validarSenha} secure={true} erro={erroSenha} />
                     <Botao texto='Entrar' funcao={logar} cor='#37BD6D' altura={25} />
+                    <ActivityIndicator animating={indicadorAtv} style={{ marginBottom: 10 }} color={MD2Colors.green400} />
                 </View>
                 <View style={{ height: '20%', width: '60%', marginVertical: 20, justifyContent: 'center' }}>
                     <Botao texto='Criar minha conta' funcao={cadastrar} cor='#419ED7' altura={20} />
