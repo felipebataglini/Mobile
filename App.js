@@ -1,3 +1,4 @@
+import AuthStateListener from "./src/components/AuthStateListener";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Login from "./src/screens/Login"
@@ -11,13 +12,18 @@ import Coleta from "./src/screens/Coleta"
 import Relatorio from "./src/screens/Relatorio"
 import Agradecimento from "./src/screens/Agradecimento";
 import { Provider } from "react-redux";
-import { store } from "./redux/store"
+import { store } from "./redux/store";
+
 
 const Stack = createStackNavigator()
 
+
 const App = () => {
+
+
     return (
         <Provider store={store}>
+            <AuthStateListener />
             <NavigationContainer>
                 <Stack.Navigator 
                     initialRouteName="Login" 

@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import { auth_mod } from '../firebase/config';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
+import { reducerSetLogin } from '../../redux/loginSlice';
 
 const theme = {
     ...DefaultTheme,
@@ -54,7 +55,20 @@ const Login = (props) => {
 
         if (erroEmail === "" && erroSenha === "") {
             signInWithEmailAndPassword(auth_mod, email, senha)
-                .then((userLogged) => {
+                .then(async (userLogged) => {
+
+                    const token = await userLogged.user.getIdToken();
+                    
+                    const serializableUser = {
+                        uid: userLogged.user.uid,
+                        email: userLogged.user.email,
+                        displayName: userLogged.user.displayName,
+                        emailVerified: userLogged.user.emailVerified,
+                        accessToken: token
+                    };
+                    
+                    dispatch(reducerSetLogin(serializableUser));
+                    
                     setindicadorAtv(true);
                     const timer = setTimeout(() => {
                         props.navigation.navigate("Drawer");
