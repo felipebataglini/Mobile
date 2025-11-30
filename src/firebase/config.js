@@ -1,8 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage"; // <--- ADICIONADO
 
-// Configurações do seu projeto "mobile-b33b9"
 const firebaseConfig = {
   apiKey: "AIzaSyD9KHeaR1lyWYYG9tSViaLZgE5wCqrjdSs",
   authDomain: "mobile-b33b9.firebaseapp.com",
@@ -13,12 +13,10 @@ const firebaseConfig = {
   measurementId: "G-FGXXJ7TDR4"
 };
 
-// Inicializa o Firebase
 const app = initializeApp(firebaseConfig);
 
-// Inicializa a Autenticação e o Banco de Dados
 const auth_mod = getAuth(app);
 const db = getFirestore(app);
+const storage = getStorage(app); // <--- ADICIONADO
 
-// Exporta para ser usado no restante do app
-export { auth_mod, db };
+export { auth_mod, db, storage }; // <--- EXPORTAR STORAGE
