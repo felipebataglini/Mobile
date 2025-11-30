@@ -1,8 +1,27 @@
 import { View, Text, StyleSheet } from 'react-native';
 import { DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import { useDispatch } from 'react-redux';
+import { auth_mod } from '../firebase/config';
+import { signOut } from 'firebase/auth';
+import { reducerSetLogout } from '../../redux/loginSlice';
 
 const CustomDrawer = (props) => {
+
+    const dispatch = useDispatch();
+
+    const handleLogout = async () => {
+        try {
+            await signOut(auth_mod); 
+
+            dispatch(reducerSetLogout()); 
+
+            props.navigation.navigate('Login'); 
+
+        } catch (error) {
+            console.error("Erro ao fazer logout:", error);
+        }
+    };
 
     const botaoPesquisas = () => {
         props.navigation.navigate('Drawer')
@@ -20,7 +39,7 @@ const CustomDrawer = (props) => {
                     )} onPress={botaoPesquisas} />
                 <DrawerItem labelStyle={estilos.label} label="Sair" icon={() => (
                         <Icon name="logout" size={22} color='#FFFFFF' />
-                    )} onPress={() => { props.navigation.popToTop() }} />
+                    )} onPress={handleLogout} />
             </View>
 
         </DrawerContentScrollView>
